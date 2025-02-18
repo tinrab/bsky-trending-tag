@@ -1,0 +1,31 @@
+services:
+  nats:
+    image: nats:2.10.25
+    container_name: nats
+    ports:
+      - 4222:4222
+      - 6222:6222
+      - 8222:8222
+    networks:
+      - bsky
+  arroyo:
+    image: ghcr.io/arroyosystems/arroyo:0.13.1
+    container_name: arroyo
+    ports:
+      - 5115:5115
+    networks:
+      - bsky
+  dragonfly:
+    image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.26.2
+    container_name: dragonfly
+    ulimits:
+      memlock: -1
+    ports:
+      - 6379:6379
+    networks:
+      - bsky
+
+networks:
+  bsky:
+    driver: bridge
+    name: bsky

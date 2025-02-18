@@ -1,0 +1,12 @@
+[distribution]
+name = "bsky-ingester-app"
+
+[broker]
+kind = "Nats"
+address = "nats://localhost:4222"
+subject_prefix = "bsky"
+
+[cache]
+kind = "Redis"
+address = "redis://localhost:6379"
+key_prefix = "bsky"

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "rs-bsky-trends",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,11 @@
+meta {
+  name: List all pipelines
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{ARROYO_API_URL}}/v1/pipelines
+  body: none
+  auth: none
+}

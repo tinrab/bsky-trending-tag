@@ -1,0 +1,7 @@
+[distribution]
+name = "bsky-ingester-app"
+
+[broker]
+kind = "Nats"
+address = "nats://localhost:4222"
+subject_prefix = "bsky"

@@ -1,0 +1,28 @@
+meta {
+  name: Create connection profile
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{ARROYO_API_URL}}/v1/connection_profiles
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "config": {
+      "name": "nats-source",
+      "servers": "nats:4222",
+      "authentication": {}
+    },
+    "connector": "nats",
+    "name": "nats-source",
+    "description": "nats source on nats:4222"
+  }
+}

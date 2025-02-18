@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "command": "just ingester_run",
+      "label": "just: run ingester",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "APP_CONFIG_PATH": "${workspaceFolder}/bsky-ingester-app/config"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "command": "just observer_run",
+      "label": "just: run observer",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "APP_CONFIG_PATH": "${workspaceFolder}/bsky-observer-app/config"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "command": "just lint",
+      "label": "just: lint",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

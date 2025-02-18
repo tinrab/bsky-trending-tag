@@ -1,0 +1,13 @@
+{
+  "rust-analyzer.checkOnSave": false,
+  "rust-analyzer.cargo.buildScripts.enable": false,
+  "rust-analyzer.procMacro.enable": false,
+  "rust-analyzer.check.allTargets": false,
+  "rust-analyzer.cargo.allTargets": false,
+  "rust-analyzer.runnables.extraEnv": {
+    "RUSTFLAGS": "-A warnings"
+  },
+  "rust-analyzer.cargo.extraEnv": {
+    "RUSTFLAGS": "-A warnings"
+  }
+}

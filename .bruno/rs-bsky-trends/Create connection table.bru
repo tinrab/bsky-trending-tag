@@ -1,0 +1,62 @@
+meta {
+  name: Create connection table
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{ARROYO_API_URL}}/v1/connection_tables
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "_todo": "Set desired name, connectionProfileId, config, .etc",
+    "name": "tags",
+    "connector": "nats",
+    "connectionProfileId": "cp_KiIJCkYvnr",
+    "tableType": "source",
+    "config": {
+      "connectorType": {
+        "sourceType": {
+          "subject": "bsky:tags"
+        }
+      }
+    },
+    "schema": {
+      "format": {
+        "json": {
+          "confluentSchemaRegistry": false,
+          "schemaId": null,
+          "includeSchema": false,
+          "debezium": false,
+          "unstructured": false,
+          "timestampFormat": "rfc3339"
+        }
+      },
+      "badData": {
+        "drop": {}
+      },
+      "fields": [
+        {
+          "fieldName": "value",
+          "fieldType": {
+            "type": {
+              "primitive": "String"
+            },
+            "sqlName": "TEXT"
+          },
+          "nullable": false
+        }
+      ],
+      "definition": {
+        "json_schema": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"TagMessage\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"value\": {\n      \"type\": \"string\",\n      \"description\": \"The tag value\"\n    }\n  },\n  \"required\": [\"value\"],\n  \"additionalProperties\": false\n}"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+meta {
+  name: Create pipeline
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{ARROYO_API_URL}}/v1/pipelines
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "ingest_trends",
+    "query": "CREATE TABLE tags (\n    value TEXT NOT NULL\n) with (\n    type = 'source',\n    connector = 'nats',\n    servers = 'nats:4222',\n    subject = 'bsky:tags',\n    format = 'json'\n);\n\nCREATE TABLE tagtrends (\n    value TEXT NOT NULL,\n    rank BIGINT NOT NULL\n) with (\n    type = 'sink',\n    connector = 'nats',\n    servers = 'nats:4222',\n    subject = 'bsky:tagtrends',\n    format = 'json'\n);\n\nINSERT INTO tagtrends\nSELECT value, row_num FROM (\n    SELECT *, ROW_NUMBER() OVER (\n        PARTITION BY window\n        ORDER BY count DESC) as row_num\n    FROM (SELECT count(*) as count,\n        value,\n        hop(interval '5 seconds', interval '15 minutes') as window\n            FROM tags\n            group by value, window)) WHERE row_num <= 20;",
+    "checkpointIntervalMicros": 10000000,
+    "parallelism": 1,
+    "action": "none",
+    "actionInProgress": true,
+    "preview": false,
+    "connector": "nats",
+    "udfs": []
+  }
+}
